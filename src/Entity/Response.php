@@ -8,14 +8,14 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ResponseRepository::class)]
-class Response extends BaseEntity
+class Response
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
+    #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
     private ?Ver $ver_id = null;
 
@@ -34,12 +34,12 @@ class Response extends BaseEntity
         return $this;
     }
 
-    public function getVerId(): ?int
+    public function getVerId(): ?Ver
     {
         return $this->ver_id;
     }
 
-    public function setVerId(int $ver_id): static
+    public function setVerId(Ver $ver_id): static
     {
         $this->ver_id = $ver_id;
 

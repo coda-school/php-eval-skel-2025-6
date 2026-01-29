@@ -9,14 +9,14 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: VerRepository::class)]
-class Ver extends BaseEntity
+class Ver
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
+    #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
     private ?Profile $user_id = null;
 
@@ -47,12 +47,12 @@ class Ver extends BaseEntity
         return $this;
     }
 
-    public function getUserId(): ?int
+    public function getUserId(): ?Profile
     {
         return $this->user_id;
     }
 
-    public function setUserId(int $user_id): static
+    public function setUserId(Profile $user_id): static
     {
         $this->user_id = $user_id;
 

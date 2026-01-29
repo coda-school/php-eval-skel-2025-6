@@ -7,7 +7,7 @@ use App\Repository\ProfileRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ProfileRepository::class)]
-class Profile extends BaseEntity
+class Profile
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -17,7 +17,7 @@ class Profile extends BaseEntity
     #[ORM\Column(length: 30, unique: true)]
     private ?string $username = null;
 
-    #[ORM\Column(length: 30)]
+    #[ORM\Column(length: 255)]
     private ?string $password = null;
 
     #[ORM\Column(length: 255, unique: true)]

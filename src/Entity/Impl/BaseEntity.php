@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 abstract class BaseEntity
 {
-    #[ORM\Column(name: 'created_date', type: Types::DATETIME_MUTABLE, nullable: false, options: ['default' => "CURRENT_TIMESTAMP"])]
+    #[ORM\Column(name: 'created_date', type: Types::DATETIME_MUTABLE, nullable: true, options: ['default' => "CURRENT_TIMESTAMP"])]
     protected \DateTime $createdDate;
 
     /*#[ORM\ManyToOne]
