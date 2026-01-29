@@ -4,30 +4,30 @@ namespace App\Entity\Impl;
 
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use App\Entity\User;
+/*use App\Entity\User;*/
 
 abstract class BaseEntity
 {
     #[ORM\Column(name: 'created_date', type: Types::DATETIME_MUTABLE, nullable: false, options: ['default' => "CURRENT_TIMESTAMP"])]
     protected \DateTime $createdDate;
 
-    #[ORM\ManyToOne]
+    /*#[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    protected User $createdBy;
+    protected User $createdBy;*/
 
     #[ORM\Column(name: 'updated_date', type: Types::DATETIME_MUTABLE, nullable: true)]
     protected null|\DateTime $updatedDate;
 
-    #[ORM\ManyToOne]
+    /*#[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: true)]
-    protected null|User $updatedBy;
+    protected null|User $updatedBy;*/
 
     #[ORM\Column(name: 'deleted_date', type: Types::DATETIME_MUTABLE, nullable: true)]
     protected null|\DateTime $deletedDate;
 
-    #[ORM\ManyToOne]
+    /*#[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: true)]
-    protected null|User $deletedBy;
+    protected null|User $deletedBy;*/
 
     #[ORM\Column(name: 'is_deleted', type: Types::BOOLEAN, nullable: false, options: ['default' => false])]
     protected bool $isDeleted = false;

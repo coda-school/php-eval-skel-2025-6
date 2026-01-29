@@ -2,34 +2,35 @@
 
 namespace App\Entity;
 
+use App\Entity\Impl\BaseEntity;
 use App\Repository\ProfileRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ProfileRepository::class)]
-class Profile
+class Profile extends BaseEntity
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 30)]
+    #[ORM\Column(length: 30, unique: true)]
     private ?string $username = null;
 
     #[ORM\Column(length: 30)]
     private ?string $password = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, unique: true)]
     private ?string $email = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $bio = null;
+    #[ORM\Column(length: 255, options: ['default' => ''])]
+    private ?string $bio = '';
 
-    #[ORM\Column]
-    private ?int $followers = null;
+    #[ORM\Column(options: ['default' => 0])]
+    private ?int $followers = 0;
 
-    #[ORM\Column]
-    private ?int $following = null;
+    #[ORM\Column(options: ['default' => 0])]
+    private ?int $following = 0;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $profile_picture = null;
