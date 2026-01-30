@@ -20,6 +20,7 @@ final class Version20260129200407 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
+        $this->addSql('ALTER TABLE profile CHANGE password password VARCHAR(255) NOT NULL');
         $this->addSql('ALTER TABLE profile_xlike ADD profile_id_id INT NOT NULL');
         $this->addSql('ALTER TABLE profile_xlike ADD ver_id_id INT NOT NULL');
         $this->addSql('ALTER TABLE profile_xlike DROP profile_id');
@@ -44,6 +45,26 @@ final class Version20260129200407 extends AbstractMigration
         $this->addSql('ALTER TABLE ver DROP user_id');
         $this->addSql('ALTER TABLE ver ADD CONSTRAINT FK_9BC42029D86650F FOREIGN KEY (user_id_id) REFERENCES profile (id) NOT DEFERRABLE');
         $this->addSql('CREATE INDEX IDX_9BC42029D86650F ON ver (user_id_id)');
+        $this->addSql('ALTER TABLE profile DROP created_date');
+        $this->addSql('ALTER TABLE ver DROP created_date');
+        $this->addSql('ALTER TABLE profile_xlike DROP created_date');
+        $this->addSql('ALTER TABLE profile_xprofile DROP created_date');
+        $this->addSql('ALTER TABLE response DROP created_date');
+        $this->addSql('ALTER TABLE profile DROP updated_date');
+        $this->addSql('ALTER TABLE ver DROP updated_date');
+        $this->addSql('ALTER TABLE profile_xlike DROP updated_date');
+        $this->addSql('ALTER TABLE profile_xprofile DROP updated_date');
+        $this->addSql('ALTER TABLE response DROP updated_date');
+        $this->addSql('ALTER TABLE profile DROP deleted_date');
+        $this->addSql('ALTER TABLE ver DROP deleted_date');
+        $this->addSql('ALTER TABLE profile_xlike DROP deleted_date');
+        $this->addSql('ALTER TABLE profile_xprofile DROP deleted_date');
+        $this->addSql('ALTER TABLE response DROP deleted_date');
+        $this->addSql('ALTER TABLE profile DROP is_deleted');
+        $this->addSql('ALTER TABLE ver DROP is_deleted');
+        $this->addSql('ALTER TABLE profile_xlike DROP is_deleted');
+        $this->addSql('ALTER TABLE profile_xprofile DROP is_deleted');
+        $this->addSql('ALTER TABLE response DROP is_deleted');
     }
 
     public function down(Schema $schema): void
