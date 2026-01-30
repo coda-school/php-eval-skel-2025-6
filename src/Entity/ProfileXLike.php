@@ -7,18 +7,18 @@ use App\Repository\ProfileXLikeRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ProfileXLikeRepository::class)]
-class ProfileXLike extends BaseEntity
+class ProfileXLike
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
+    #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
     private ?Profile $profile_id = null;
 
-    #[ORM\Column]
+    #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
     private ?Ver $ver_id = null;
 
@@ -34,24 +34,24 @@ class ProfileXLike extends BaseEntity
         return $this;
     }
 
-    public function getProfileId(): ?int
+    public function getProfileId(): ?Profile
     {
         return $this->profile_id;
     }
 
-    public function setProfileId(int $profile_id): static
+    public function setProfileId(Profile $profile_id): static
     {
         $this->profile_id = $profile_id;
 
         return $this;
     }
 
-    public function getVerId(): ?int
+    public function getVerId(): ?Ver
     {
         return $this->ver_id;
     }
 
-    public function setVerId(int $ver_id): static
+    public function setVerId(Ver $ver_id): static
     {
         $this->ver_id = $ver_id;
 

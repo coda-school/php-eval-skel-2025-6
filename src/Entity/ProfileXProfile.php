@@ -7,18 +7,18 @@ use App\Repository\ProfileXProfileRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ProfileXProfileRepository::class)]
-class ProfileXProfile extends BaseEntity
+class ProfileXProfile
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
+    #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
     private ?Profile $profile_one_id = null;
 
-    #[ORM\Column]
+    #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
     private ?Profile $profile_two_id = null;
 
@@ -34,24 +34,24 @@ class ProfileXProfile extends BaseEntity
         return $this;
     }
 
-    public function getProfileOneId(): ?int
+    public function getProfileOneId(): ?Profile
     {
         return $this->profile_one_id;
     }
 
-    public function setProfileOneId(int $profile_one_id): static
+    public function setProfileOneId(Profile $profile_one_id): static
     {
         $this->profile_one_id = $profile_one_id;
 
         return $this;
     }
 
-    public function getProfileTwoId(): ?int
+    public function getProfileTwoId(): ?Profile
     {
         return $this->profile_two_id;
     }
 
-    public function setProfileTwoId(int $profile_two_id): static
+    public function setProfileTwoId(Profile $profile_two_id): static
     {
         $this->profile_two_id = $profile_two_id;
 
