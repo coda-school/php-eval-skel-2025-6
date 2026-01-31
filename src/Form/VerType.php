@@ -16,10 +16,10 @@ class VerType extends AbstractType
     {
         $builder
             ->add('content', TextareaType::class, [
-                'label' => false, // On cache le label pour un look plus "réseau social"
+                'label' => false,
                 'attr' => [
                     'placeholder' => "Ecrit ton Ver",
-                    'class' => 'form-control', // Classe CSS (Bootstrap ou autre)
+                    'class' => 'form-control',
                     'rows' => 3
                 ],
                 'constraints' => [
