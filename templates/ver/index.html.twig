@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Publier un Ver - Archibald{% endblock %}
+
+{% block body %}
+    <div style="max-width: 600px; margin: 50px auto; font-family: sans-serif;">
+        <h1>Que veux tu partager a Archibald ?</h1>
+
+        {{ form_start(verForm) }}
+        <div style="margin-bottom: 15px;">
+            {{ form_widget(verForm) }}
+            {{ form_errors(verForm) }}
+        </div>
+
+        <button type="submit" style="background-color: #1da1f2; color: white; border: none; padding: 10px 20px; border-radius: 20px; cursor: pointer;">
+            Lâcher le Ver
+        </button>
+        {{ form_end(verForm) }}
+    </div>
+{% endblock %}

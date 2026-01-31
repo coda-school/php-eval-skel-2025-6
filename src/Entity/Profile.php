@@ -2,12 +2,15 @@
 
 namespace App\Entity;
 
-use App\Entity\Impl\BaseEntity;
 use App\Repository\ProfileRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: ProfileRepository::class)]
-class Profile
+#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
+class Profile implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -35,99 +38,22 @@ class Profile
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $profile_picture = null;
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    public function setId(int $id): static
-    {
-        $this->id = $id;
-
-        return $this;
-    }
-
-    public function getUsername(): ?string
-    {
-        return $this->username;
-    }
-
-    public function setUsername(string $username): static
-    {
-        $this->username = $username;
-
-        return $this;
-    }
-
-    public function getPassword(): ?string
-    {
-        return $this->password;
-    }
-
-    public function setPassword(string $password): static
-    {
-        $this->password = $password;
-
-        return $this;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): static
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    public function getBio(): ?string
-    {
-        return $this->bio;
-    }
-
-    public function setBio(string $bio): static
-    {
-        $this->bio = $bio;
-
-        return $this;
-    }
-
-    public function getFollowers(): ?int
-    {
-        return $this->followers;
-    }
-
-    public function setFollowers(int $followers): static
-    {
-        $this->followers = $followers;
-
-        return $this;
-    }
-
-    public function getFollowing(): ?int
-    {
-        return $this->following;
-    }
-
-    public function setFollowing(int $following): static
-    {
-        $this->following = $following;
-
-        return $this;
-    }
-
-    public function getProfilePicture(): ?string
-    {
-        return $this->profile_picture;
-    }
-
-    public function setProfilePicture(?string $profile_picture): static
-    {
-        $this->profile_picture = $profile_picture;
-
-        return $this;
-    }
+    public function getUserIdentifier(): string { return (string) $this->email; }
+    public function getRoles(): array { return ['ROLE_USER']; }
+    public function eraseCredentials(): void {}
+    public function getId(): ?int { return $this->id; }
+    public function getUsername(): ?string { return $this->username; }
+    public function setUsername(string $username): static { $this->username = $username; return $this; }
+    public function getPassword(): ?string { return $this->password; }
+    public function setPassword(string $password): static { $this->password = $password; return $this; }
+    public function getEmail(): ?string { return $this->email; }
+    public function setEmail(string $email): static { $this->email = $email; return $this; }
+    public function getBio(): ?string { return $this->bio; }
+    public function setBio(string $bio): static { $this->bio = $bio; return $this; }
+    public function getFollowers(): ?int { return $this->followers; }
+    public function setFollowers(int $followers): static { $this->followers = $followers; return $this; }
+    public function getFollowing(): ?int { return $this->following; }
+    public function setFollowing(int $following): static { $this->following = $following; return $this; }
+    public function getProfilePicture(): ?string { return $this->profile_picture; }
+    public function setProfilePicture(?string $profile_picture): static { $this->profile_picture = $profile_picture; return $this; }
 }
