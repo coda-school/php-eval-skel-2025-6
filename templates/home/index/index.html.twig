@@ -14,6 +14,12 @@
 </hgroup>
 
 <div class="unlogged-feed">
-    <!--Insérer les vers depuis la db -->
+    {% for ver in trendingVers %}
+        <div class="trending ver">
+            <strong>{{ ver.username }}</strong> - {{ ver.date|date('d/m/Y H:i') }}<br>
+            {{ ver.content }}<br>
+            <button type="submit" id="like" class="under-ver-button">♥</button> Likes : {{ ver.likes }}
+        </div>
+    {% endfor %}
 </div>
 {% endblock %}
