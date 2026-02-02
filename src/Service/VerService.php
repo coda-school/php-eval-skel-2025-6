@@ -11,8 +11,10 @@ class VerService{
     )
     {
     }
-
     public function getTrendingVers(){
         return $this->verRepository->getTrendingVers();
+    }
+    public function getSingleVer($id){
+        return $this->verRepository->getSingleVer($id);
     }
 }
