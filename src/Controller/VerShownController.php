@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Ver;
+use App\Service\ResponseService;
 use App\Service\VerService;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,15 +16,17 @@ final class VerShownController extends AbstractController
     public function index(
         #[MapEntity(mapping: ['id' => 'id'])]
         Ver $ver,
-
-        VerService $verService
+        VerService $verService,
+        ResponseService $responseService
     ): Response
     {
         $verInfos = $verService->getSingleVer($ver->getId());
+        $responses = $responseService->getResponsesToAVer($ver->getId());
 
         return $this->render('ver_shown/index.html.twig', [
             'controller_name' => 'VerShownController',
             'ver' => $verInfos,
+            'responses' => $responses,
         ]);
     }
 }

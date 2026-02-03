@@ -40,4 +40,6 @@ class VerRepository extends ServiceEntityRepository
             ->getOneOrNullResult();
         return $qb;
     }
+
+
 }

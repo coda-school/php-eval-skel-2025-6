@@ -1,0 +1,21 @@
+{% extends '_layouts/in_app.html.twig' %}
+
+{% block title %}Accueil - Archibald{% endblock %}
+
+{% block content %}
+
+    <hgroup class="main-title">
+        <h1>Bienvenue sur Archibald.fr !</h1>
+    </hgroup>
+
+    <div class="logged-feed">
+        {% for ver in vers %}
+            <div class="trending ver">
+                <strong>{{ ver.username }}</strong> - {{ ver.date|date('d/m/Y H:i') }}<br>
+                {{ ver.content }}<br>
+                <button type="submit" id="like" class="under-ver-button">♥</button> Likes : {{ ver.likes }}
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}
