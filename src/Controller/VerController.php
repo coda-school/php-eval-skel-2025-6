@@ -46,4 +46,50 @@ class VerController extends AbstractController
             'verForm' => $form->createView(),
         ]);
     }
+
+    #[Route('/ver/modifier/{id}', name: 'app_ver_edit')]
+    #[IsGranted('ROLE_USER')]
+    public function edit(
+        Ver $ver,
+        Request $request,
+        EntityManagerInterface $em
+    ): response {
+        if ($ver->getUserId() !== $this->getUser()) {
+            throw $this->createAccessDeniedException("Tu ne peux pas modifier ce ver !");
+        }
+
+        $form = $this->createForm(VerType::class, $ver);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->flush();
+            $this->addFlash('success', 'Ver mis à jour !');
+            return $this->redirectToRoute('home');
+        }
+
+        return $this->render('ver/edit.html.twig', [
+            'verForm' => $form->createView(),
+            'ver' => $ver,
+        ]);
+    }
+
+    #[Route('/ver/supprimer/{id}', name: 'app_ver_delete', methods: ['POST'])]
+    #[IsGranted('ROLE_USER')]
+    public function delete(
+        Ver $ver,
+        Request $request,
+        EntityManagerInterface $em
+    ): Response {
+        if ($ver->getUserId() !== $this->getUser()) {
+            throw $this->createAccessDeniedException("Action interdite.");
+        }
+
+        if ($this->isCsrfTokenValid('delete' . $ver->getId(), $request->request->get('_token'))) {
+            $em->remove($ver);
+            $em->flush();
+            $this->addFlash('success', 'Le ver a été supprimé.');
+        }
+        return $this->redirectToRoute('home');
+    }
+
 }

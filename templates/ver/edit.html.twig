@@ -1,0 +1,32 @@
+{% extends '_layouts/in_app.html.twig' %}
+
+{% block title %}Modifier mon Ver{% endblock %}
+
+{% block content %}
+
+    <div class="publish-container">
+        <div class="logo-main">
+            <img src="{{ asset('img/logo_archibald.png') }}" alt="Archibald">
+        </div>
+
+        <h1>Modifier mon ver</h1>
+
+        {{ form_start(verForm) }}
+        <div class="form-row">
+            {{ form_widget(verForm, {'attr': {'placeholder': 'Corrige ton ver...', 'rows': '4'}}) }}
+            {{ form_errors(verForm) }}
+        </div>
+
+        <button type="submit" class="btn-publish">
+            Enregistrer les modifs
+        </button>
+        {{ form_end(verForm) }}
+
+        <form method="post" action="{{ path('app_ver_delete', {'id': ver.id}) }}" onsubmit="return confirm('Es-tu sûr de vouloir supprimer ce ver ?');" style="margin-top: 20px;">
+            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ ver.id) }}">
+            <button type="submit" class="btn-delete" style="background: none; border: none; color: #e74c3c; cursor: pointer; text-decoration: underline; font-size: 0.9rem;">
+                Supprimer définitivement
+            </button>
+        </form>
+    </div>
+{% endblock %}
