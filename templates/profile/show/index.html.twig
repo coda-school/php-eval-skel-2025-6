@@ -3,18 +3,47 @@
 {% block title %}{{ profile.username }}{% endblock %}
 
 {% block content %}
-    <header id="nameAndPp">
-        <img src="{{ profile.profile_picture }}" alt="Profil de {{ profile.username }}">
-        <h2>{{ profile.username }}</h2>
-    </header>
+    <div>
+        <header id="nameAndPp">
+            <img src="{{ profile.profile_picture }}" alt="Profil de {{ profile.username }}">
+            <h2>{{ profile.username }}</h2>
+        </header>
 
-    <div class="stats">
-        <p>{{ profile.followers }}</p>
-        <p>{{ profile.following }}</p>
+        <div class="stats">
+            <p>Nombre de followers : {{ profile.followers }}</p>
+            <p>Nombre de suivis : {{ profile.following }}</p>
+            {% if isItYourProfile %}
+                <button class="settings">
+                    Modifier votre profil
+                </button>
+            {% else %}
+                <form method="post" action="/follow-adding/{{ profile.id }}">
+                    <button class="{% if alreadyFollowed %}followed{% else %}not-followed{% endif %}" name="follow" value="{% if alreadyFollowed %}followed{% else %}not-followed{% endif %}">
+                        {% if alreadyFollowed %}
+                            Suivi(e)
+                        {% else %}
+                            Suivre
+                        {% endif %}
+                    </button>
+                </form>
+            {% endif %}
+        </div>
+
+        <div class="bio">
+            {{ profile.bio }}
+        </div>
     </div>
 
-    <div class="bio">
-        {{ profile.bio }}
+    <div class="profile-vers">
+        {% for ver in vers %}
+            <div class="profile-ver ver">
+                <strong>{{ ver.username }}</strong> - {{ ver.date|date('d/m/Y H:i') }}<br>
+                {{ ver.content }}<br>
+                <button type="submit" id="like" class="under-ver-button">♥</button> Likes : {{ ver.likes }}
+                <p>Comments : {{ ver.comments }}</p>
+                <p>Shares : {{ ver.shares }}</p>
+            </div>
+        {% endfor %}
     </div>
 
 {% endblock %}

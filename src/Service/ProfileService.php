@@ -20,4 +20,12 @@ class ProfileService{
     public function getProfile($id){
         return $this->profileRepository->getProfile($id);
     }
+
+    public function getProfileInfos($id){
+        return $this->profileRepository->getProfileInfos($id);
+    }
+
+    public function getProfileWithEmail($email){
+        return $this->profileRepository->getProfileWithEmail($email);
+    }
 }

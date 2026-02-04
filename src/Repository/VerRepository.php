@@ -41,5 +41,17 @@ class VerRepository extends ServiceEntityRepository
         return $qb;
     }
 
+    public function getVersOfAProfile($id){
+        $qb = $this
+            ->createQueryBuilder('v')
+            ->innerJoin(Profile::class, 'p', 'WITH', 'v.user_id = p.id')
+            ->select('v.content', 'v.likes', 'v.date', 'v.comments', 'v.shares', 'p.username', 'p.profile_picture')
+            ->where('v.user_id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getResult();
+        return $qb;
+    }
+
 
 }

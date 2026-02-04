@@ -17,4 +17,8 @@ class VerService{
     public function getSingleVer($id){
         return $this->verRepository->getSingleVer($id);
     }
+
+    public function getVersOfAProfile($id){
+        return $this->verRepository->getVersOfAProfile($id);
+    }
 }

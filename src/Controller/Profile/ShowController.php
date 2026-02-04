@@ -4,6 +4,8 @@ namespace App\Controller\Profile;
 
 use App\Entity\Profile;
 use App\Service\ProfileService;
+use App\Service\ProfileXProfileService;
+use App\Service\VerService;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,14 +13,17 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class ShowController extends AbstractController
 {
-    #[Route('/profile/{id}', name: 'profile_{id}', methods: ['GET'])]
+    #[Route('/profile/{id}', name: 'profile', methods: ['GET'])]
     public function index(
         #[MapEntity(mapping: ['id' => 'id'])]
         Profile $profile,
         ProfileService $profileService,
+        VerService $verService,
+        ProfileXProfileService $profileXProfileService,
     ): Response
     {
         $isItYourProfile = false;
+        $alreadyFollowed = false;
         $isUserLogged = '_layouts/standard.html.twig';
         $user = $this->getUser();
         if($user){
@@ -26,8 +31,10 @@ final class ShowController extends AbstractController
             if($profile->getEmail() === $user->getEmail()){
                 $isItYourProfile = true;
             }
+            $alreadyFollowed = $profileXProfileService->isProfileFollowed($profile->getId(), $user->getEmail());
         }
-        $profileInfos = $profileService->getProfile($profile->getId());
+        $profileInfos = $profileService->getProfileInfos($profile->getId());
+        $profileVers = $verService->getVersOfAProfile($profile->getId());
 
 
 
@@ -35,7 +42,9 @@ final class ShowController extends AbstractController
             'controller_name' => 'Profile/ShowController',
             'isUserLogged' => $isUserLogged,
             'profile' => $profileInfos,
+            'vers' => $profileVers,
             'isItYourProfile' => $isItYourProfile,
+            'alreadyFollowed' => $alreadyFollowed,
         ]);
     }
 }

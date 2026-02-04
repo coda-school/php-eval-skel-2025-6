@@ -32,12 +32,33 @@ class ProfileRepository extends ServiceEntityRepository
         return $qb;
     }
 
-    public function getProfile($id){
+    public function getProfile($id): Profile{
         $qb = $this
             ->createQueryBuilder('p')
-            ->select('p.username', 'p.email', 'p.bio', 'p.followers', 'p.following', 'p.profile_picture')
             ->where('p.id = :id')
             ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
+        return $qb;
+    }
+
+    public function getProfileInfos($id){
+        $qb = $this
+            ->createQueryBuilder('p')
+            ->where('p.id = :id')
+            ->select('p.id', 'p.username', 'p.email', 'p.bio', 'p.followers', 'p.following', 'p.profile_picture')
+            ->setParameter(':id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
+        return $qb;
+    }
+
+    public function getProfileWithEmail($email){
+        $qb = $this
+            ->createQueryBuilder('p')
+            ->select('p.username', 'p.email', 'p.password', 'p.bio', 'p.followers', 'p.following', 'p.profile_picture')
+            ->where('p.email = :email')
+            ->setParameter('email', $email)
             ->getQuery()
             ->getOneOrNullResult();
         return $qb;
