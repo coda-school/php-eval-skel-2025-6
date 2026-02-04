@@ -4,10 +4,22 @@
 
     <aside>
         <h3>Archibald</h3>
-        <!--Insérer les liens vers les différents formulaires -->
-        <p>Tendances</p>
-        <p>Se connecter</p>
-        <p>S'inscrire</p>
+        <div id="tendances-link">
+            <a href="{{ path('home') }}">
+                Tendances
+            </a>
+        </div>
+        <div id="login-link">
+            <a href="{{ path('app_login') }}">
+                Se connecter
+            </a>
+        </div>
+        <div id="register-link">
+            <a href="{{ path('app_register') }}">
+                S'inscrire
+            </a>
+        </div>
+
     </aside>
 
 	{% block content %}

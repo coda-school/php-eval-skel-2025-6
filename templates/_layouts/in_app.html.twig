@@ -2,6 +2,26 @@
 
 {% block body %}
 
+    <aside>
+        <h3>Archibald</h3>
+
+        <div class="followed-link">
+            <a href="{{ path('home_inapp') }}">
+                Suivis
+            </a>
+        </div>
+        <div class="ver-link">
+            <a href="{{ path('app_ver_new') }}">
+                Poster un Ver
+            </a>
+        </div>
+        <div class="logout-link">
+            <p>
+                Se déconnecter
+            </p>
+        </div>
+    </aside>
+
 	{% block content %}{% endblock %}
 
 {% endblock %}

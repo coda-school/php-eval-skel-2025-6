@@ -20,6 +20,11 @@ final class VerShownController extends AbstractController
         ResponseService $responseService
     ): Response
     {
+        $isUserLogged = '_layouts/standard.html.twig';
+        $user = $this->getUser();
+        if($user){
+            $isUserLogged = '_layouts/in_app.html.twig';
+        }
         $verInfos = $verService->getSingleVer($ver->getId());
         $responses = $responseService->getResponsesToAVer($ver->getId());
 
@@ -27,6 +32,7 @@ final class VerShownController extends AbstractController
             'controller_name' => 'VerShownController',
             'ver' => $verInfos,
             'responses' => $responses,
+            'isUserLogged' => $isUserLogged,
         ]);
     }
 }
