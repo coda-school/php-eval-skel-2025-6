@@ -16,4 +16,8 @@ class ProfileService{
     public function getFollowingVers($email){
         return $this->profileRepository->getFollowingVers($email);
     }
+
+    public function getProfile($id){
+        return $this->profileRepository->getProfile($id);
+    }
 }

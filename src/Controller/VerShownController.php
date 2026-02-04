@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class VerShownController extends AbstractController
 {
-    #[Route('/ver/{id}', name: 'ver', methods: ['GET'])]
+    #[Route('/ver/{id}', name: 'ver_{id}', methods: ['GET'])]
     public function index(
         #[MapEntity(mapping: ['id' => 'id'])]
         Ver $ver,

@@ -35,8 +35,8 @@ class Profile implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(options: ['default' => 0])]
     private ?int $following = 0;
 
-    #[ORM\Column(length: 255, nullable: true, options: ['default' => 'ppArchibald.jpg'])]
-    private ?string $profile_picture = 'ppArchibald.jpg';
+    #[ORM\Column(length: 255, nullable: true, options: ['default' => '/img/ppArchibald.jpg'])]
+    private ?string $profile_picture = '/img/ppArchibald.jpg';
 
     public function getUserIdentifier(): string { return (string) $this->email; }
     public function getRoles(): array { return ['ROLE_USER']; }

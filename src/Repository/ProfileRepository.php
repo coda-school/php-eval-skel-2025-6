@@ -32,5 +32,16 @@ class ProfileRepository extends ServiceEntityRepository
         return $qb;
     }
 
+    public function getProfile($id){
+        $qb = $this
+            ->createQueryBuilder('p')
+            ->select('p.username', 'p.email', 'p.bio', 'p.followers', 'p.following', 'p.profile_picture')
+            ->where('p.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
+        return $qb;
+    }
+
 
 }

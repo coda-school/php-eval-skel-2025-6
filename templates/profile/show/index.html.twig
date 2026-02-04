@@ -1,0 +1,20 @@
+{% extends isUserLogged %}
+
+{% block title %}{{ profile.username }}{% endblock %}
+
+{% block content %}
+    <header id="nameAndPp">
+        <img src="{{ profile.profile_picture }}" alt="Profil de {{ profile.username }}">
+        <h2>{{ profile.username }}</h2>
+    </header>
+
+    <div class="stats">
+        <p>{{ profile.followers }}</p>
+        <p>{{ profile.following }}</p>
+    </div>
+
+    <div class="bio">
+        {{ profile.bio }}
+    </div>
+
+{% endblock %}
