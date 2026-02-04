@@ -11,10 +11,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 final class AddAFollowController extends AbstractController
 {
     #[Route('/follow-adding/{id}', name: 'follow-adding', methods: ['POST'])]
+    #[IsGranted('ROLE_USER')]
     public function create(
         #[MapEntity(mapping: ['id' => 'id'])]
         Profile $profile,
@@ -25,12 +27,19 @@ final class AddAFollowController extends AbstractController
     {
         $currentStatus = $request->request->get('follow');
         $user = $this->getUser();
+        $profileUser = $profileService->getProfile($user->getId());
 
         if($currentStatus === 'not-followed'){
             $relation = new ProfileXProfile();
-            $relation->setProfileOneId($profileService->getProfile($user->getId()));
+            $relation->setProfileOneId($profileUser);
             $relation->setProfileTwoId($profile);
             $em->persist($relation);
+            $em->flush();
+            $profile->setFollowers($profile->getFollowers() + 1);
+            $em->persist($profile);
+            $em->flush();
+            $profileUser->setFollowing($profileUser->getFollowing() + 1);
+            $em->persist($profileUser);
             $em->flush();
         }else{
             $relationToDelete = $em->getRepository(ProfileXProfile::class)->findBy([
@@ -44,6 +53,12 @@ final class AddAFollowController extends AbstractController
                 ]);
             }
             $em->remove($relationToDelete[0]);
+            $em->flush();
+            $profile->setFollowers($profile->getFollowers() - 1);
+            $em->persist($profile);
+            $em->flush();
+            $profileUser->setFollowing($profileUser->getFollowing() - 1);
+            $em->persist($profileUser);
             $em->flush();
         }
         return $this->redirect('/profile/'.$profile->getId());
