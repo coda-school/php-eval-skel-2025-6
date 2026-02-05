@@ -37,9 +37,16 @@ Une fois ça fait, aller à l'adresse https://localhost et profiter d'Archibald 
 
 ## Description du projet
 
+Notre projet nommé Archibald, est un clone de l'application Twitter.
+Sur ce dernier, vous pourrez ainsi vous créer un compte, vous y connecter, vous créer une biographie, poster des "Vers" ainsi que voir les plus populaires ou ceux des personnes que vous suivez.
+Vous pouvez accéder à la page d'un vers pour le liker ou le commenter en cliquant sur ce dernier depuis votre feed ou depuis la page d'un utilisateur. Vous accéderez d'ailleurs à la page d'un utilisateur en cliquant sur son nom une fois sur la page d'un de ses vers.
+
+
 ## Fonctionnalités additionnelles 
 
-- Tweets Populaires
+- Tweets populaires
+- Système de commentaires
+- Système de likes
 
 ## Utilisation de l'IA
 

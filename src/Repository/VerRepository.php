@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Profile;
 use App\Entity\Ver;
+use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -93,6 +94,35 @@ class VerRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
         return $qb;
+    }
+
+    public function relativeDate($verId): string{
+        $ver = $this
+            ->createQueryBuilder('ver')
+            ->where('ver.id = :verId')
+            ->setParameter('verId', $verId)
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+        $current = new DateTime();
+        $diff = $ver->getDate()->diff($current);
+
+        if($diff->y > 0){
+            $time =  'Il y a '.$diff->y.' ans';
+        }elseif ($diff->m > 0){
+            $time = 'Il y a '.$diff->m.' mois';
+        }elseif ($diff->d > 0){
+            $time = 'Il y a '.$diff->d.' jours';
+        }elseif ($diff->h > 0){
+            $time = 'Il y a '.$diff->h.' heures';
+        }elseif ($diff->i > 0){
+            $time = 'Il y a '.$diff->i.' minutes';
+        }elseif ($diff->s > 0){
+            $time = 'Il y a '.$diff->s.' secondes';
+        }else{
+            $time = "À l'instant";
+        }
+        return $time;
     }
 
 

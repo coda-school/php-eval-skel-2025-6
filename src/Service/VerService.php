@@ -28,4 +28,8 @@ class VerService{
     public function getVersOfAProfile($id){
         return $this->verRepository->getVersOfAProfile($id);
     }
+
+    public function relativeDate(Ver $ver): string{
+        return $this->verRepository->relativeDate($ver);
+    }
 }

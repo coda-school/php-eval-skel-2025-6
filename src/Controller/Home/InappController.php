@@ -3,6 +3,7 @@
 namespace App\Controller\Home;
 
 use App\Service\ProfileService;
+use App\Service\VerService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,7 +14,10 @@ final class InappController extends AbstractController
 {
     #[Route('/inapp', name: 'home_inapp', methods: ['GET'])]
     #[IsGranted('ROLE_USER')]
-    public function index(ProfileService $profileService, Request $request): Response
+    public function index(
+        ProfileService $profileService,
+        Request $request,
+    ): Response
     {
         $loggedUser = $this->getUser();
         $userEmail = $loggedUser->getEmail();
