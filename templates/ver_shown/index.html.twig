@@ -24,6 +24,17 @@
             Comments : {{ ver.comments }}
             Shares : {{ ver.shares }}
         </div>
+        <div class="add-comment">
+            <h3>Commenter</h3>
+            {% if app.user %}
+                {{ form_start(commentForm) }}
+                {{ form_widget(commentForm) }}
+                <button type="submit" class="btn">Envoyer mon commentaire</button>
+                {{ form_end(commentForm) }}
+            {% else %}
+                <p>Vous devez être connecté pour commenter</p>
+            {% endif %}
+        </div>
         <div class="date">
             {{ ver.date|date('d/m/Y H:i') }}
         </div>
