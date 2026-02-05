@@ -36,6 +36,7 @@ final class VerShownController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $newResponse->setVerId($ver);
+            $ver->setComments($ver->getComments() + 1);
 
             $em->persist($newResponse);
             $em->flush();
