@@ -8,14 +8,19 @@
         <h1>Bienvenue sur Archibald.fr !</h1>
     </hgroup>
 
+
     <div class="logged-feed">
-        {% for ver in vers %}
-            <div class="trending ver">
-                <strong>{{ ver.username }}</strong> - {{ ver.date|date('d/m/Y H:i') }}<br>
-                {{ ver.content }}<br>
-                <button type="submit" id="like" class="under-ver-button">♥</button> Likes : {{ ver.likes }}
-            </div>
-        {% endfor %}
+        {% if noVers %}
+            <p>Vous ne suivez personne pour l'instant...</p>
+        {% else %}
+            {% for ver in vers %}
+                <div class="trending ver">
+                    <strong>{{ ver.username }}</strong> - {{ ver.date|date('d/m/Y H:i') }}<br>
+                    {{ ver.content }}<br>
+                    <button type="submit" id="like" class="under-ver-button">♥</button> Likes : {{ ver.likes }}
+                </div>
+            {% endfor %}
+        {% endif %}
     </div>
 
 {% endblock %}

@@ -15,14 +15,19 @@ final class InappController extends AbstractController
     public function index(ProfileService $profileService): Response
     {
         $loggedUser = $this->getUser();
+        $noVers = false;
         $userEmail = $loggedUser->getEmail();
 
         $vers = $profileService->getFollowingVers($userEmail);
+        if(empty($vers)){
+            $noVers = true;
+        }
 
 
         return $this->render('home/inapp/index.html.twig', [
             'controller_name' => 'Home/InappController',
             'vers' => $vers,
+            'noVers' => $noVers,
         ]);
     }
 }
