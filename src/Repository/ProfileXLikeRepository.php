@@ -2,7 +2,9 @@
 
 namespace App\Repository;
 
+use App\Entity\Profile;
 use App\Entity\ProfileXLike;
+use App\Entity\Ver;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -16,28 +18,17 @@ class ProfileXLikeRepository extends ServiceEntityRepository
         parent::__construct($registry, ProfileXLike::class);
     }
 
-    //    /**
-    //     * @return ProfileXLike[] Returns an array of ProfileXLike objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('p')
-    //            ->andWhere('p.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('p.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+    public function isVerLiked($verId, $userEmail){
+        $qb = $this
+            ->createQueryBuilder('pl')
+            ->innerJoin(Profile::class, 'p', 'WITH', 'pl.ver_id = p.id')
+            ->innerJoin(Ver::class, 'v', 'WITH', 'pl.ver_id = v.id')
+            ->where('p.email = :userEmail AND v.id = :verId')
+            ->setParameter('userEmail', $userEmail)
+            ->setParameter('verId', $verId)
+            ->getQuery()
+            ->getOneOrNullResult();
+        return $qb;
+    }
 
-    //    public function findOneBySomeField($value): ?ProfileXLike
-    //    {
-    //        return $this->createQueryBuilder('p')
-    //            ->andWhere('p.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
 }

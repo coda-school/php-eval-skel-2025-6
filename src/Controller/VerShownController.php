@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Ver;
+use App\Service\ProfileXLikeService;
 use App\Service\ResponseService;
 use App\Service\VerService;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
@@ -17,16 +18,19 @@ final class VerShownController extends AbstractController
         #[MapEntity(mapping: ['id' => 'id'])]
         ?Ver $ver,
         VerService $verService,
-        ResponseService $responseService
+        ResponseService $responseService,
+        ProfileXLikeService $profileXLikeService
     ): Response
     {
         if(!$ver){
             return $this->redirectToRoute('error');
         }
+        $alreadyLiked = false;
         $isUserLogged = '_layouts/standard.html.twig';
         $user = $this->getUser();
         if($user){
             $isUserLogged = '_layouts/in_app.html.twig';
+            $alreadyLiked = $profileXLikeService->isVerLiked($ver->getId(), $user->getEmail());
         }
         $verInfos = $verService->getSingleVer($ver->getId());
         $responses = $responseService->getResponsesToAVer($ver->getId());
@@ -36,6 +40,7 @@ final class VerShownController extends AbstractController
             'ver' => $verInfos,
             'responses' => $responses,
             'isUserLogged' => $isUserLogged,
+            'alreadyLiked' => $alreadyLiked,
         ]);
     }
 }

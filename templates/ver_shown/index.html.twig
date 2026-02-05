@@ -11,7 +11,9 @@
             {{ ver.content }}
         </div>
         <div class="stats">
-            <button type="submit" id="like" class="under-ver-button">♥</button> : {{ ver.likes }}
+            <form method="post" action="/like-adding/{{ ver.id }}">
+                <button class="{% if alreadyLiked %}liked{% else %}not-liked{% endif %}"
+            </form>
             Comments : {{ ver.comments }}
             Shares : {{ ver.shares }}
         </div>
