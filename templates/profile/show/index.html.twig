@@ -39,6 +39,22 @@
             <div class="profile-ver ver">
                 <strong>{{ ver.username }}</strong> - {{ ver.date|date('d/m/Y H:i') }}<br>
                 {{ ver.content }}<br>
+                {% if isItYourProfile %}
+                    <div class="ver-actions" style="margin: 10px 0;">
+                        <a href="{{ path('app_ver_edit', {'id': ver.id}) }}"
+                           style="font-size: 0.8rem; background: #f0f0f0; padding: 5px 10px; border-radius: 5px; text-decoration: none; color: var(--archibald-text);">
+                            Modifier
+                        </a>
+                        <form method="post" action="{{ path('app_ver_delete', {'id': ver.id}) }}"
+                              onsubmit="return confirm('Veux-tu vraiment supprimer ce ver ?');"
+                              style="display: inline; margin-left: 10px;">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ ver.id) }}">
+                            <button type="submit" style="font-size: 0.8rem; background: none; border: none; color: #e74c3c; cursor: pointer; text-decoration: underline;">
+                                Supprimer
+                            </button>
+                        </form>
+                    </div>
+                {% endif %}
                 <p>Likes : {{ ver.likes }} </p>
                 <p>Comments : {{ ver.comments }}</p>
                 <p>Shares : {{ ver.shares }}</p>
