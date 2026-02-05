@@ -1,0 +1,70 @@
+.app-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 220px;
+    background: #0f172a;
+    color: white;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Title */
+.sidebar-title {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* Menu wrapper */
+.sidebar-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Item */
+.menu-item a {
+    display: block;
+    padding: 10px 14px;
+    border-radius: 8px;
+
+    color: #e5e7eb;
+    text-decoration: none;
+    font-size: 15px;
+
+    transition: all 0.2s ease;
+}
+
+/* Hover */
+.menu-item a:hover {
+    background: #1e293b;
+    color: white;
+}
+
+/* Active link (optional later) */
+.menu-item.active a {
+    background: #2563eb;
+    color: white;
+}
+
+/* Logout button */
+.menu-item.danger a {
+    margin-top: 20px;
+    background: #7f1d1d;
+    color: #fecaca;
+}
+
+.menu-item.danger a:hover {
+    background: #991b1b;
+    color: white;
+}
+
+.main-content {
+    flex: 1; /* prend tout l'espace restant */
+    padding: 20px;
+    background: #f9fafb;
+}

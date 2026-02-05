@@ -2,27 +2,33 @@
 
 {% block body %}
 
-    <aside>
-        <h3>Archibald</h3>
-        <div id="tendances-link">
-            <a href="{{ path('home') }}">
-                Tendances
-            </a>
-        </div>
-        <div id="login-link">
-            <a href="{{ path('app_login') }}">
-                Se connecter
-            </a>
-        </div>
-        <div id="register-link">
-            <a href="{{ path('app_register') }}">
-                S'inscrire
-            </a>
-        </div>
+    <aside class="sidebar">
+        <h3 class="sidebar-title">Archibald</h3>
 
+        <nav class="sidebar-menu">
+            <div class="menu-item">
+                <a href="{{ path('home') }}">
+                    Tendances
+                </a>
+            </div>
+            <div class="menu-item">
+                <a href="{{ path('app_login') }}">
+                    Se connecter
+                </a>
+            </div>
+            <div class="menu-item">
+                <a href="{{ path('app_register') }}">
+                    S'inscrire
+                </a>
+            </div>
+        </nav>
     </aside>
 
-	{% block content %}
-    {% endblock %}
+    <div class="main-content">
+
+	    {% block content %}
+        {% endblock %}
+
+    </div>
 
 {% endblock %}

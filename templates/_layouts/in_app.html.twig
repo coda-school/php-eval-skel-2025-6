@@ -2,31 +2,38 @@
 
 {% block body %}
 
-    <aside>
-        <h3>Archibald</h3>
+    <aside class="sidebar">
+        <h3 class="sidebar-title">Archibald</h3>
 
-        <div class="followed-link">
-            <a href="{{ path('home_inapp') }}">
-                Suivis
-            </a>
-        </div>
-        <div class="tendances-link">
-            <a href="{{ path('home') }}">
-                Tendances
-            </a>
-        </div>
-        <div class="ver-link">
-            <a href="{{ path('app_ver_new') }}">
-                Poster un Ver
-            </a>
-        </div>
-        <div class="logout-link">
-            <a href="{{ logout_path() }}">
-                Se déconnecter
-            </a>
-        </div>
+        <nav class="sidebar-menu">
+
+            <div class="menu-item">
+                <a href="{{ path('home_inapp') }}">
+                    Suivis
+                </a>
+            </div>
+            <div class="menu-item">
+                <a href="{{ path('home') }}">
+                    Tendances
+                </a>
+            </div>
+            <div class="menu-item">
+                <a href="{{ path('app_ver_new') }}">
+                    Poster un Ver
+                </a>
+            </div>
+            <div class="menu-item danger">
+                <a href="{{ logout_path() }}">
+                    Se déconnecter
+                </a>
+            </div>
+        </nav>
     </aside>
 
-	{% block content %}{% endblock %}
+    <div class="main-content">
+
+	    {% block content %}{% endblock %}
+
+    </div>
 
 {% endblock %}
