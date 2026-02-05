@@ -21,7 +21,7 @@ class VerRepository extends ServiceEntityRepository
         $qb = $this
             ->createQueryBuilder('ver')
             ->innerJoin(Profile::class, 'p', 'WITH', 'ver.user_id = p.id')
-            ->select('ver.content', 'ver.likes', 'ver.comments', 'ver.shares', 'ver.date', 'p.username', 'p.profile_picture')
+            ->select('ver.id', 'ver.content', 'ver.likes', 'ver.comments', 'ver.shares', 'ver.date', 'p.username', 'p.profile_picture')
             ->orderBy('ver.likes', 'DESC')
             ->setMaxResults(10)
             ->getQuery()
@@ -33,7 +33,7 @@ class VerRepository extends ServiceEntityRepository
         $qb = $this
             ->createQueryBuilder('ver')
             ->innerJoin(Profile::class, 'p', 'WITH', 'ver.user_id = p.id')
-            ->select('ver.id', 'ver.content', 'ver.likes', 'ver.comments', 'ver.shares', 'ver.date', 'p.username', 'p.profile_picture')
+            ->select('ver.id', 'ver.content', 'ver.likes', 'ver.comments', 'ver.shares', 'ver.date','p.id as pid',  'p.username', 'p.profile_picture')
             ->where('ver.id = :id')
             ->setParameter('id', $id)
             ->getQuery()
