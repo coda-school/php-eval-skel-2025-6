@@ -50,7 +50,7 @@ final class VerShownController extends AbstractController
             $alreadyLiked = $profileXLikeService->isVerLiked($ver->getId(), $user->getEmail());
         }
         $verInfos = $verService->getSingleVer($ver->getId());
-        $responses = $responseService->getResponsesToAVer($ver->getId());
+        $responses = $em->getRepository(VerResponse::class)->findBy(['ver_id' => $ver]);
 
         return $this->render('ver_shown/index.html.twig', [
             'controller_name' => 'VerShownController',
