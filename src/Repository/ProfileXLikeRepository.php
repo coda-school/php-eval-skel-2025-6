@@ -21,7 +21,7 @@ class ProfileXLikeRepository extends ServiceEntityRepository
     public function isVerLiked($verId, $userEmail){
         $qb = $this
             ->createQueryBuilder('pl')
-            ->innerJoin(Profile::class, 'p', 'WITH', 'pl.ver_id = p.id')
+            ->innerJoin(Profile::class, 'p', 'WITH', 'pl.profile_id = p.id')
             ->innerJoin(Ver::class, 'v', 'WITH', 'pl.ver_id = v.id')
             ->where('p.email = :userEmail AND v.id = :verId')
             ->setParameter('userEmail', $userEmail)

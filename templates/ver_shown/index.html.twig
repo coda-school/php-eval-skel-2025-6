@@ -4,7 +4,7 @@
 
 {% block content %}
     <div class="ver-pleine-page">
-        <div class="auteur">
+        <div class="link-to-profile" data-id="{{ ver.pid }}">
             <strong>{{ ver.username }}</strong>
         </div>
         <div class="content">
@@ -19,6 +19,7 @@
                         ♡
                     {% endif %}
                 </button>
+                Likes : {{ ver.likes }}
             </form>
             Comments : {{ ver.comments }}
             Shares : {{ ver.shares }}

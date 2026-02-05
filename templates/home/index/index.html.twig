@@ -4,7 +4,6 @@
 
 {% block content %}
 
-
 <hgroup class="main-title">
     <h1>Bienvenue sur Archibald.fr !</h1>
     {% if isUserLogged %}
@@ -17,15 +16,36 @@
 <div class="unlogged-feed">
     {% for ver in trendingVers %}
         <div class="trending ver">
-            <strong>{{ ver.username }}</strong> - {{ ver.date|date('d/m/Y H:i') }}<br>
-            {{ ver.content }}
+            <div>
+            <strong>{{ ver.username }}</strong></div>
+            <div class="link-to-ver" data-id="{{ ver.id }}">
+            {{ ver.content }}</div>
             <div class="ver-stats">
                 Likes : {{ ver.likes }}
                 Commentaires : {{ ver.comments }}
                 Partages : {{ ver.shares }}
+                - {{ ver.date|date('d/m/Y H:i') }}
             </div>
-
         </div>
     {% endfor %}
 </div>
+
+{% if pages > 1 %}
+    <nav class="pagination" style="display:flex; gap:12px; align-items:center; margin-top: 16px;">
+        {% if page > 1 %}
+            <a href="{{ path('home', {page: page - 1}) }}">Précédent</a>
+        {% else %}
+            <span style="opacity: .5;">Précédent</span>
+        {% endif %}
+
+        <span>Page {{ page }} / {{ pages }}</span>
+
+        {% if page < pages %}
+            <a href="{{ path('home', {page: page + 1}) }}">Suivant</a>
+        {% else %}
+            <span style="opacity: .5;">Suivant</span>
+        {% endif %}
+    </nav>
+{% endif %}
+
 {% endblock %}

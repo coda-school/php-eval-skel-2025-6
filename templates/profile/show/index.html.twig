@@ -38,7 +38,8 @@
         {% for ver in vers %}
             <div class="profile-ver ver">
                 <strong>{{ ver.username }}</strong> - {{ ver.date|date('d/m/Y H:i') }}<br>
-                {{ ver.content }}<br>
+                <div class="link-to-ver" data-id="{{ ver.id }}">
+                {{ ver.content }}</div>
                 {% if isItYourProfile %}
                     <div class="ver-actions" style="margin: 10px 0;">
                         <a href="{{ path('app_ver_edit', {'id': ver.id}) }}"

@@ -11,9 +11,16 @@ class VerService{
     )
     {
     }
+
     public function getTrendingVers(){
         return $this->verRepository->getTrendingVers();
     }
+
+    public function getTrendingVersPaginated(int $page, int $limit): array
+    {
+        return $this->verRepository->getTrendingVersPaginated($page, $limit);
+    }
+
     public function getSingleVer($id){
         return $this->verRepository->getSingleVer($id);
     }
