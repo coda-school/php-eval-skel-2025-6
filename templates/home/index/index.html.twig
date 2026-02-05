@@ -1,4 +1,4 @@
-{% extends '_layouts/standard.html.twig' %}
+{% extends path %}
 
 {% block title %}Accueil - Archibald{% endblock %}
 
@@ -7,7 +7,11 @@
 
 <hgroup class="main-title">
     <h1>Bienvenue sur Archibald.fr !</h1>
-    <h4>Consultez les tendances ou connectez vous à votre compte</h4>
+    {% if isUserLogged %}
+        <h4>Tendances</h4>
+    {% else %}
+        <h4>Consultez les tendances ou connectez vous à votre compte</h4>
+    {% endif %}
 </hgroup>
 
 <div class="unlogged-feed">
