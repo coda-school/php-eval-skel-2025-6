@@ -32,6 +32,52 @@ class ProfileRepository extends ServiceEntityRepository
         return $qb;
     }
 
+    public function getFollowingVersPaginated(string $email, int $page, int $limit): array
+    {
+        $page = max(1, $page);
+        $limit = max(1, $limit);
+        $offset = ($page - 1) * $limit;
+
+        $baseQb = $this
+            ->createQueryBuilder('p1')
+            ->innerJoin(ProfileXProfile::class, 'pp', 'WITH', 'pp.profile_one_id = p1.id')
+            ->innerJoin(Profile::class, 'p2', 'WITH', 'pp.profile_two_id = p2.id')
+            ->innerJoin(Ver::class, 'ver', 'WITH', 'ver.user_id = p2.id')
+            ->where('p1.email = :email')
+            ->setParameter('email', $email);
+
+        $countQb = clone $baseQb;
+        $total = (int) $countQb
+            ->select('COUNT(ver.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        $itemsQb = clone $baseQb;
+        $items = $itemsQb
+            ->select(
+                'ver.id',
+                'ver.content',
+                'ver.likes',
+                'ver.comments',
+                'ver.shares',
+                'ver.date',
+                'p2.username',
+                'p2.profile_picture'
+            )
+            ->orderBy('ver.likes', 'DESC')
+            ->addOrderBy('ver.date', 'DESC')
+            ->addOrderBy('ver.id', 'DESC')
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+
+        return [
+            'items' => $items,
+            'total' => $total,
+        ];
+    }
+
     public function getProfile($id): Profile{
         $qb = $this
             ->createQueryBuilder('p')
