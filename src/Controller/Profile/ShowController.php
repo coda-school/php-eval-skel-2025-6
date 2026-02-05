@@ -16,12 +16,16 @@ final class ShowController extends AbstractController
     #[Route('/profile/{id}', name: 'profile', methods: ['GET'])]
     public function index(
         #[MapEntity(mapping: ['id' => 'id'])]
-        Profile $profile,
+        ?Profile $profile,
         ProfileService $profileService,
         VerService $verService,
         ProfileXProfileService $profileXProfileService,
     ): Response
     {
+        if(!$profile){
+            return $this->redirectToRoute('error');
+        }
+
         $isItYourProfile = false;
         $alreadyFollowed = false;
         $isUserLogged = '_layouts/standard.html.twig';

@@ -15,11 +15,14 @@ final class VerShownController extends AbstractController
     #[Route('/ver/{id}', name: 'ver_{id}', methods: ['GET'])]
     public function index(
         #[MapEntity(mapping: ['id' => 'id'])]
-        Ver $ver,
+        ?Ver $ver,
         VerService $verService,
         ResponseService $responseService
     ): Response
     {
+        if(!$ver){
+            return $this->redirectToRoute('error');
+        }
         $isUserLogged = '_layouts/standard.html.twig';
         $user = $this->getUser();
         if($user){
