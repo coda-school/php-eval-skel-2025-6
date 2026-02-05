@@ -9,12 +9,15 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 final class toYourProfileController extends AbstractController
 {
-    #[Route('/profile/to/your/profile', name: 'app_profile_to_your_profile')]
+    #[Route('/profileredirect', name: 'to_your_profile')]
     #[IsGranted('ROLE_USER')]
     public function index(): Response
     {
-        return $this->render('profile/to_your_profile/index.html.twig', [
-            'controller_name' => 'Profile/toYourProfileController',
-        ]);
+        $userToProfile = $this->getUser();
+        $id = $userToProfile->getId();
+
+        $route = '/profile/'.(string)$id;
+
+        return $this->redirect($route);
     }
 }
