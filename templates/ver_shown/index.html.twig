@@ -12,7 +12,13 @@
         </div>
         <div class="stats">
             <form method="post" action="/like-adding/{{ ver.id }}">
-                <button class="{% if alreadyLiked %}liked{% else %}not-liked{% endif %}"
+                <button class="{% if alreadyLiked %}liked{% else %}not-liked{% endif %}" name="like" value="{% if alreadyLiked %}liked{% else %}not-liked{% endif %}">
+                    {% if alreadyLiked %}
+                        ♥
+                    {% else %}
+                        ♡
+                    {% endif %}
+                </button>
             </form>
             Comments : {{ ver.comments }}
             Shares : {{ ver.shares }}
