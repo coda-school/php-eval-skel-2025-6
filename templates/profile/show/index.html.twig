@@ -13,9 +13,9 @@
             <p>Nombre de followers : {{ profile.followers }}</p>
             <p>Nombre de suivis : {{ profile.following }}</p>
             {% if isItYourProfile %}
-                <button class="settings">
+                <a href="{{ path('profile_edit') }}" class="settings">
                     Modifier votre profil
-                </button>
+                </a>
             {% else %}
                 <form method="post" action="/follow-adding/{{ profile.id }}">
                     <button class="{% if alreadyFollowed %}followed{% else %}not-followed{% endif %}" name="follow" value="{% if alreadyFollowed %}followed{% else %}not-followed{% endif %}">
