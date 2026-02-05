@@ -3,7 +3,6 @@
 namespace App\Service;
 
 use App\Repository\ProfileRepository;
-use App\Repository\ResponseRepository;
 
 class ProfileService{
 
@@ -15,6 +14,11 @@ class ProfileService{
 
     public function getFollowingVers($email){
         return $this->profileRepository->getFollowingVers($email);
+    }
+
+    public function getFollowingVersPaginated(string $email, int $page, int $limit): array
+    {
+        return $this->profileRepository->getFollowingVersPaginated($email, $page, $limit);
     }
 
     public function getProfile($id){

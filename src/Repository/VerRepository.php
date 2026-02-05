@@ -29,6 +29,48 @@ class VerRepository extends ServiceEntityRepository
         return $qb;
     }
 
+    public function getTrendingVersPaginated(int $page, int $limit): array
+    {
+        $page = max(1, $page);
+        $limit = max(1, $limit);
+        $offset = ($page - 1) * $limit;
+
+        $baseQb = $this
+            ->createQueryBuilder('ver')
+            ->innerJoin(Profile::class, 'p', 'WITH', 'ver.user_id = p.id');
+
+        $countQb = clone $baseQb;
+        $total = (int) $countQb
+            ->select('COUNT(ver.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        $itemsQb = clone $baseQb;
+        $items = $itemsQb
+            ->select(
+                'ver.id',
+                'ver.content',
+                'ver.likes',
+                'ver.comments',
+                'ver.shares',
+                'ver.date',
+                'p.username',
+                'p.profile_picture'
+            )
+            ->orderBy('ver.likes', 'DESC')
+            ->addOrderBy('ver.date', 'DESC')
+            ->addOrderBy('ver.id', 'DESC')
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+
+        return [
+            'items' => $items,
+            'total' => $total,
+        ];
+    }
+
     public function getSingleVer($id){
         $qb = $this
             ->createQueryBuilder('ver')

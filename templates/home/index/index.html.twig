@@ -4,7 +4,6 @@
 
 {% block content %}
 
-
 <hgroup class="main-title">
     <h1>Bienvenue sur Archibald.fr !</h1>
     {% if isUserLogged %}
@@ -24,8 +23,26 @@
                 Commentaires : {{ ver.comments }}
                 Partages : {{ ver.shares }}
             </div>
-
         </div>
     {% endfor %}
 </div>
+
+{% if pages > 1 %}
+    <nav class="pagination" style="display:flex; gap:12px; align-items:center; margin-top: 16px;">
+        {% if page > 1 %}
+            <a href="{{ path('home', {page: page - 1}) }}">Précédent</a>
+        {% else %}
+            <span style="opacity: .5;">Précédent</span>
+        {% endif %}
+
+        <span>Page {{ page }} / {{ pages }}</span>
+
+        {% if page < pages %}
+            <a href="{{ path('home', {page: page + 1}) }}">Suivant</a>
+        {% else %}
+            <span style="opacity: .5;">Suivant</span>
+        {% endif %}
+    </nav>
+{% endif %}
+
 {% endblock %}
