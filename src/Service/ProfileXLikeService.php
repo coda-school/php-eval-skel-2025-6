@@ -14,4 +14,8 @@ class ProfileXLikeService{
     public function isVerLiked($verId, $userEmail){
         return $this->profileXLikeRepository->isVerLiked($verId, $userEmail);
     }
+
+    public function getLikesToDelete($id){
+        return $this->profileXLikeRepository->getLikesToDelete($id);
+    }
 }

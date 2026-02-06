@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Ver;
 use App\Form\VerType;
+use App\Service\ProfileXLikeService;
 use App\Service\ResponseService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -80,7 +81,8 @@ class VerController extends AbstractController
         Ver $ver,
         Request $request,
         EntityManagerInterface $em,
-        ResponseService $responseService
+        ResponseService $responseService,
+        ProfileXLikeService $profileXLikeService
     ): Response {
         if ($ver->getUserId() !== $this->getUser()) {
             throw $this->createAccessDeniedException("Action interdite.");
@@ -88,9 +90,16 @@ class VerController extends AbstractController
 
         if ($this->isCsrfTokenValid('delete' . $ver->getId(), $request->request->get('_token'))) {
             $responses = $responseService->getResponsesToDelete($ver->getId());
+            $likes = $profileXLikeService->getLikesToDelete($ver->getId());
             if($responses){
                 foreach ($responses as $response){
                     $em->remove($response);
+                    $em->flush();
+                }
+            }
+            if($likes){
+                foreach ($likes as $like){
+                    $em->remove($like);
                     $em->flush();
                 }
             }

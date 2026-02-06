@@ -31,4 +31,15 @@ class ProfileXLikeRepository extends ServiceEntityRepository
         return $qb;
     }
 
+    public function getLikesToDelete($id){
+        $qb = $this
+            ->createQueryBuilder('pl')
+            ->innerJoin(Ver::class, 'v', 'WITH', 'pl.ver_id = v.id')
+            ->where('v.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getResult();
+        return $qb;
+    }
+
 }
