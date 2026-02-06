@@ -67,4 +67,115 @@
     flex: 1; /* prend tout l'espace restant */
     padding: 20px;
     background: #f9fafb;
+    max-width: 750px;
+    margin: 0 auto;
+}
+
+/* ===========================
+   PAGE TENDANCES / ACCUEIL
+=========================== */
+
+/* ----- Titre ----- */
+
+.main-title {
+    margin-bottom: 32px;
+}
+
+.main-title h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.main-title h4 {
+    font-size: 1rem;
+    color: #666;
+    font-weight: 400;
+}
+
+
+/* ----- Feed ----- */
+
+.unlogged-feed {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+
+/* ----- Carte d’un ver ----- */
+
+.ver {
+    background: #fff;
+    border-radius: 14px;
+    padding: 16px 18px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    transition: transform .15s ease, box-shadow .15s ease;
+}
+
+.ver:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+}
+
+
+/* ----- Auteur ----- */
+
+.ver strong {
+    font-size: 0.95rem;
+    color: #222;
+}
+
+
+/* ----- Contenu ----- */
+
+.link-to-ver {
+    margin: 8px 0 12px;
+    font-size: 1.05rem;
+    line-height: 1.5;
+    cursor: pointer;
+    color: #111;
+}
+
+.link-to-ver:hover {
+    text-decoration: underline;
+}
+
+
+/* ----- Stats ----- */
+
+.ver-stats {
+    font-size: 0.85rem;
+    color: #777;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+
+/* ===========================
+   PAGINATION
+=========================== */
+
+.pagination {
+    justify-content: center;
+    margin-top: 32px;
+    font-size: 0.9rem;
+}
+
+.pagination a {
+    padding: 6px 12px;
+    border-radius: 8px;
+    text-decoration: none;
+    background: #f2f2f2;
+    color: #333;
+    transition: background .15s ease;
+}
+
+.pagination a:hover {
+    background: #ddd;
+}
+
+.pagination span {
+    font-weight: 500;
 }
