@@ -3,14 +3,18 @@
 {% block title %}Erreur - Archibald{% endblock %}
 
 {% block body %}
-    <h1>
-        Quelque chose a mal tourné...
-    </h1>
+    <div class="error-page">
+        <div>
+            <h1>
+                Quelque chose a mal tourné...
+            </h1>
+        </div>
 
-    <div class="error-message">
-        <img src="{{ asset('img/errorArchibald.jpg') }}" alt="Erreur d'Archibald">
-        <p>On dirait qu'Archibald n'a pas pu trouver ce que tu voulais . . .</p>
-        <p>Retourne donc à la <a href="{{ path(path) }}">page d'accueil</a> !</p>
+        <div class="error-message">
+            <img src="{{ asset('img/errorArchibald.jpg') }}" alt="Erreur d'Archibald">
+            <p>On dirait qu'Archibald n'a pas pu trouver ce que tu voulais . . .</p>
+            <p>Retourne donc à la <a href="{{ path(path) }}">page d'accueil</a> !</p>
+        </div>
+
     </div>
-
 {% endblock %}
