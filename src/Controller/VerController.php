@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Ver;
 use App\Form\VerType;
+use App\Service\ResponseService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -78,13 +79,21 @@ class VerController extends AbstractController
     public function delete(
         Ver $ver,
         Request $request,
-        EntityManagerInterface $em
+        EntityManagerInterface $em,
+        ResponseService $responseService
     ): Response {
         if ($ver->getUserId() !== $this->getUser()) {
             throw $this->createAccessDeniedException("Action interdite.");
         }
 
         if ($this->isCsrfTokenValid('delete' . $ver->getId(), $request->request->get('_token'))) {
+            $responses = $responseService->getResponsesToDelete($ver->getId());
+            if($responses){
+                foreach ($responses as $response){
+                    $em->remove($response);
+                    $em->flush();
+                }
+            }
             $em->remove($ver);
             $em->flush();
             $this->addFlash('success', 'Le ver a été supprimé.');

@@ -29,5 +29,16 @@ class ResponseRepository extends ServiceEntityRepository
         return $qb;
     }
 
+    public function getResponsesToDelete($id){
+        $qb = $this
+            ->createQueryBuilder('r')
+            ->innerJoin(Ver::class, 'v', 'WITH', 'r.ver_id = v.id')
+            ->where('v.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getResult();
+        return $qb;
+    }
+
 
 }

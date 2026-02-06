@@ -15,4 +15,8 @@ class ResponseService{
     public function getResponsesToAVer($id){
         return $this->responseRepository->getResponsesToAVer($id);
     }
+
+    public function getResponsesToDelete($id){
+        return $this->responseRepository->getResponsesToDelete($id);
+    }
 }
