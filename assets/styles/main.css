@@ -179,3 +179,173 @@
 .pagination span {
     font-weight: 500;
 }
+
+/* ===========================
+   FEED CONNECTÉ (SUIVIS)
+=========================== */
+
+.logged-feed {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+
+/* Message quand aucun ver */
+
+.logged-feed p {
+    text-align: center;
+    padding: 40px 20px;
+    background: #f8f9fb;
+    border-radius: 14px;
+    color: #666;
+    font-size: 1rem;
+    border: 1px dashed #ccc;
+}
+
+/* ===========================
+   PAGE PROFIL
+=========================== */
+
+/* ----- Header profil ----- */
+
+#nameAndPp {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+#nameAndPp img {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #e5e5e5;
+}
+
+#nameAndPp h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+
+/* ----- Stats & actions ----- */
+
+.stats {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+    font-size: 0.9rem;
+}
+
+.stats p {
+    margin: 0;
+    color: #555;
+}
+
+.stats form {
+    margin: 0;
+}
+
+.stats a.settings {
+    padding: 8px 14px;
+    border-radius: 10px;
+    background: #f0f0f0;
+    text-decoration: none;
+    color: #333;
+    font-size: 0.85rem;
+}
+
+.stats a.settings:hover {
+    background: #e0e0e0;
+}
+
+
+/* ----- Bouton suivre ----- */
+
+.stats button {
+    padding: 8px 18px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all .15s ease;
+}
+
+button.not-followed {
+    background: #111;
+    color: #fff;
+}
+
+button.not-followed:hover {
+    background: #333;
+}
+
+button.followed {
+    background: #f2f2f2;
+    color: #333;
+}
+
+button.followed:hover {
+    background: #e0e0e0;
+}
+
+
+/* ----- Bio ----- */
+
+.bio {
+    margin: 16px 0 28px;
+    padding: 14px 18px;
+    background: #fafafa;
+    border-radius: 14px;
+    font-size: 0.95rem;
+    color: #444;
+}
+
+
+/* ===========================
+   VERS DU PROFIL
+=========================== */
+
+.profile-vers {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.profile-ver {
+    background: #fff;
+    border-radius: 14px;
+    padding: 16px 18px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+
+/* Auteur & date */
+
+.profile-ver strong {
+    font-size: 0.95rem;
+}
+
+
+/* Stats ligne par ligne (différence demandée) */
+
+.profile-ver p {
+    margin: 4px 0;
+    font-size: 0.85rem;
+    color: #777;
+}
+
+
+/* Actions (modifier / supprimer) */
+
+.ver-actions a {
+    transition: background .15s ease;
+}
+
+.ver-actions a:hover {
+    background: #ddd !important;
+}
